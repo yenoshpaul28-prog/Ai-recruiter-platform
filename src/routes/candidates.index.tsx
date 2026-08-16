@@ -38,7 +38,7 @@ import { computeMatch } from "@/lib/ct/scoring";
 import { primaryJobFor } from "@/lib/ct/selectors";
 import type { Candidate, CandidateSkill, EvidenceType } from "@/lib/ct/types";
 
-export const Route = createFileRoute("/candidates")({
+export const Route = createFileRoute("/candidates/")({
   head: () => ({
     meta: [
       { title: "Candidates — Clear Talent AI" },
