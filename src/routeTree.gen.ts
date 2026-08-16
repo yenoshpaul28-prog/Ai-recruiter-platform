@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ShortlistsRouteImport } from './routes/shortlists'
 import { Route as CandidatesIndexRouteImport } from './routes/candidates.index'
 import { Route as CandidatesCandidateIdRouteImport } from './routes/candidates.$candidateId'
 import { Route as JobsIndexRouteImport } from './routes/jobs.index'
@@ -19,6 +20,11 @@ import { Route as JobsNewRouteImport } from './routes/jobs.new'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShortlistsRoute = ShortlistsRouteImport.update({
+  id: '/shortlists',
+  path: '/shortlists',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CandidatesIndexRoute = CandidatesIndexRouteImport.update({
@@ -49,6 +55,7 @@ const JobsNewRoute = JobsNewRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/shortlists': typeof ShortlistsRoute
   '/candidates/$candidateId': typeof CandidatesCandidateIdRoute
   '/jobs/$jobId': typeof JobsJobIdRoute
   '/jobs/new': typeof JobsNewRoute
@@ -57,6 +64,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/shortlists': typeof ShortlistsRoute
   '/candidates/$candidateId': typeof CandidatesCandidateIdRoute
   '/jobs/$jobId': typeof JobsJobIdRoute
   '/jobs/new': typeof JobsNewRoute
@@ -66,6 +74,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/shortlists': typeof ShortlistsRoute
   '/candidates/$candidateId': typeof CandidatesCandidateIdRoute
   '/jobs/$jobId': typeof JobsJobIdRoute
   '/jobs/new': typeof JobsNewRoute
@@ -76,6 +85,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/shortlists'
     | '/candidates/$candidateId'
     | '/jobs/$jobId'
     | '/jobs/new'
@@ -84,6 +94,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/shortlists'
     | '/candidates/$candidateId'
     | '/jobs/$jobId'
     | '/jobs/new'
@@ -92,6 +103,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/shortlists'
     | '/candidates/$candidateId'
     | '/jobs/$jobId'
     | '/jobs/new'
@@ -101,6 +113,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ShortlistsRoute: typeof ShortlistsRoute
   CandidatesCandidateIdRoute: typeof CandidatesCandidateIdRoute
   JobsJobIdRoute: typeof JobsJobIdRoute
   JobsNewRoute: typeof JobsNewRoute
@@ -115,6 +128,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shortlists': {
+      id: '/shortlists'
+      path: '/shortlists'
+      fullPath: '/shortlists'
+      preLoaderRoute: typeof ShortlistsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/candidates/': {
@@ -157,6 +177,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ShortlistsRoute: ShortlistsRoute,
   CandidatesCandidateIdRoute: CandidatesCandidateIdRoute,
   JobsJobIdRoute: JobsJobIdRoute,
   JobsNewRoute: JobsNewRoute,
