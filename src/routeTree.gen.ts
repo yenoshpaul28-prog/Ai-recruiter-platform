@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BiasAuditRouteImport } from './routes/bias-audit'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as ShortlistsRouteImport } from './routes/shortlists'
 import { Route as CandidatesIndexRouteImport } from './routes/candidates.index'
 import { Route as CandidatesCandidateIdRouteImport } from './routes/candidates.$candidateId'
@@ -26,6 +27,11 @@ const IndexRoute = IndexRouteImport.update({
 const BiasAuditRoute = BiasAuditRouteImport.update({
   id: '/bias-audit',
   path: '/bias-audit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ShortlistsRoute = ShortlistsRouteImport.update({
@@ -62,6 +68,7 @@ const JobsNewRoute = JobsNewRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/bias-audit': typeof BiasAuditRoute
+  '/settings': typeof SettingsRoute
   '/shortlists': typeof ShortlistsRoute
   '/candidates/$candidateId': typeof CandidatesCandidateIdRoute
   '/jobs/$jobId': typeof JobsJobIdRoute
@@ -72,6 +79,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/bias-audit': typeof BiasAuditRoute
+  '/settings': typeof SettingsRoute
   '/shortlists': typeof ShortlistsRoute
   '/candidates/$candidateId': typeof CandidatesCandidateIdRoute
   '/jobs/$jobId': typeof JobsJobIdRoute
@@ -83,6 +91,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/bias-audit': typeof BiasAuditRoute
+  '/settings': typeof SettingsRoute
   '/shortlists': typeof ShortlistsRoute
   '/candidates/$candidateId': typeof CandidatesCandidateIdRoute
   '/jobs/$jobId': typeof JobsJobIdRoute
@@ -95,6 +104,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/bias-audit'
+    | '/settings'
     | '/shortlists'
     | '/candidates/$candidateId'
     | '/jobs/$jobId'
@@ -105,6 +115,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/bias-audit'
+    | '/settings'
     | '/shortlists'
     | '/candidates/$candidateId'
     | '/jobs/$jobId'
@@ -115,6 +126,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/bias-audit'
+    | '/settings'
     | '/shortlists'
     | '/candidates/$candidateId'
     | '/jobs/$jobId'
@@ -126,6 +138,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BiasAuditRoute: typeof BiasAuditRoute
+  SettingsRoute: typeof SettingsRoute
   ShortlistsRoute: typeof ShortlistsRoute
   CandidatesCandidateIdRoute: typeof CandidatesCandidateIdRoute
   JobsJobIdRoute: typeof JobsJobIdRoute
@@ -148,6 +161,13 @@ declare module '@tanstack/react-router' {
       path: '/bias-audit'
       fullPath: '/bias-audit'
       preLoaderRoute: typeof BiasAuditRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/shortlists': {
@@ -198,6 +218,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BiasAuditRoute: BiasAuditRoute,
+  SettingsRoute: SettingsRoute,
   ShortlistsRoute: ShortlistsRoute,
   CandidatesCandidateIdRoute: CandidatesCandidateIdRoute,
   JobsJobIdRoute: JobsJobIdRoute,
