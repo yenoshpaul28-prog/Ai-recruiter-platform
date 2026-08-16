@@ -246,7 +246,7 @@ function CandidateProfile() {
               <h4 className="font-medium">Projects</h4>
               <ul className="mt-1 space-y-1 text-muted-foreground">
                 {candidate.projects.map((p, i) => (
-                  <li key={i}>• {p.title} — {p.description}</li>
+                  <li key={i}>• {p.name} — {p.description}</li>
                 ))}
               </ul>
             </div>
