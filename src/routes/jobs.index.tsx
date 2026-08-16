@@ -28,7 +28,7 @@ import { useStore } from "@/lib/ct/store";
 import { jobStats } from "@/lib/ct/selectors";
 import type { JobStatus } from "@/lib/ct/types";
 
-export const Route = createFileRoute("/jobs")({
+export const Route = createFileRoute("/jobs/")({
   head: () => ({
     meta: [
       { title: "Jobs — Clear Talent AI" },
